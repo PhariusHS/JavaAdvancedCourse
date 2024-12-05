@@ -7,7 +7,15 @@
 </head>
 <body>
         <h1 th:text="${title}"></h1>
-        <p th:text="${nameUser}"></p>
-        <p th:text="${lastNameUser}"></p>
+        <p th:text="${User.name}"></p>
+        <p th:text="${User.lastName}"></p>
+        <p th:if="${User.email}" th:text="${User.email}"></p>
+        <p th:if="${User.email == null}" th:text="${'Email doesn't exist'}"></p>
+
+
+        <p th:text="${User1.name}"></p>
+        <p th:text="${User1.lastName}"></p>
+        <p th:if="${User1.email}" th:text="${User1.email}"></p>
+        <p th:if="${User1.email == null}" th:text="${'Email doesn't exist'}"></p>
 </body>
 </html>
