@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,9 @@ import com.pharius.curso.springboot.webapp.springboot_web.models.UserDTO;
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @RestController
@@ -58,15 +62,46 @@ public class UserRestController {
 
 
     @GetMapping("/servlets")
-    public UserDTO getUserWithServlets(HttpServletRequest request ) {
+    public UserDTO getUserWithServlets(HttpServletRequest request ) {// get user object with servlets httprequest
 
 
         UserDTO userDTO = new UserDTO();
-
+        
         userDTO.setName(request.getParameter("name"));
         userDTO.setLastName(request.getParameter("lastName"));
 
         return userDTO;
+    }
+
+
+    @GetMapping("/pathvariable/{name}") //Passing the parameter with the url/
+    public UserDTO passParameterWithPathVariable(@PathVariable String name) {
+        
+        UserDTO userDTO = new UserDTO();
+        userDTO.setName(name);
+        return userDTO;
+
+    }
+    
+    
+
+    @GetMapping("/pathvariables/{name}/{lastName}")//Passing the parameters with the url/
+    public Map<String, Object> passParametersWithPathVariables(@PathVariable String name, @PathVariable String lastName) {
+        
+        Map<String, Object> userMap = new HashMap<>();
+        userMap.put("map", name);
+        userMap.put("lastName", lastName);
+
+        return userMap;
+    }
+    
+    
+
+    @PostMapping("/post") // make a new user
+    public User postMethodName(@RequestBody User user) {
+        
+        //database logic to save the new user
+        return user;
     }
     
     
